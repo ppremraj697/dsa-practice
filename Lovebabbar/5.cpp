@@ -32,12 +32,23 @@ int power(int num, int pow)
     return a;
 }
 
+vector<int> decToBin(int x)
+{
+    vector<int> v;
+    while (x)
+    {
+        int bit = x & 1;
+        v.push_back(bit);
+        x = x >> 1;
+    }
+    return v;
+}
+
 int main()
 {
     string str;
-    cout << "Enter a binary string : " << endl;
+    cout << "Enter a binary string(String of 0's and 1's) : " << endl;
     cin >> str;
-
     int ans1 = binToDec(str);
     cout << "The decimal value of binary string is : " << ans1 << endl;
 
@@ -46,11 +57,20 @@ int main()
     cin >> a;
     cout << "Enter the value of b : " << endl;
     cin >> b;
-
     int ans2 = power(a, b);
     cout << "a raised to power b is : " << ans2 << endl;
 
-    
+    int p;
+    cout << "Enter the value of p in decimal " << endl;
+    cin >> p;
+    vector<int> ans3 = decToBin(p);
+    cout << "Binary representation of " << p << " is " << endl;
+    int size = ans3.size();
+    for (int i = size - 1; i >= 0; i--)
+    {
+        cout << ans3[i];
+        ans3.pop_back();
+    }
 
     return 0;
 }
