@@ -1,5 +1,4 @@
-class Solution704 {
-
+public class Leetcode704{
     public int search(int[] nums, int target) {
 
         int start = 0;
@@ -21,12 +20,10 @@ class Solution704 {
 
         return -1;
     }
-}
 
-public class Test704 {
     public static void main(String args[]) {
         
-        Solution704 sol = new Solution704();
+        Leetcode704 sol = new Leetcode704();
         int arr[] = {-1,0,3,5,9,12};
         int ans1 = sol.search(arr, 9);
         int ans2 = sol.search(arr, 2);
