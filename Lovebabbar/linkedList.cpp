@@ -72,11 +72,48 @@ void insertAtPosition(Node *&head, Node *&tail, int position, int data)
     curr->next = newNode;
 }
 
+void deleteNode(Node *&head, Node *&tail, int position)
+{
+    if (head == NULL)
+    {
+        cout << "LinkedList is Empty. Can't delete!!!" << endl;
+        return;
+    }
+
+    if (position == 1)
+    {
+        Node *temp = head;
+        head = head->next;
+        temp->next = NULL;
+        delete temp;
+        return;
+    }
+
+    Node *curr = head;
+    int count = 1;
+
+    while (curr != NULL && count < position - 1)
+    {
+        curr = curr->next;
+        count++;
+    }
+
+    Node *forward = curr->next;
+    curr->next = forward->next;
+    forward->next = NULL;
+    delete forward;
+
+    if (curr->next == NULL)
+    {
+        tail = curr;
+    }
+}
+
 void printList(Node *head)
 {
     if (head == NULL)
     {
-        cout << "LinkedList is empty" << endl;
+        cout << "LinkedList is empty. Can't Print!!!" << endl;
         return;
     }
 
@@ -107,6 +144,15 @@ int main()
     printList(head);
     cout << "Printing head->data " << head->data << endl;
     cout << "Printing tail->data " << tail->data << endl;
+
+    deleteNode(head, tail, 1); // deleting first node
+    printList(head);
+
+    deleteNode(head, tail, 5); // deleting any middle node
+    printList(head);
+
+    deleteNode(head, tail, 7); // deleting last node
+    printList(head);
 
     return 0;
 }
