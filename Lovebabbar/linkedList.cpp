@@ -109,6 +109,44 @@ void deleteNode(Node *&head, Node *&tail, int position)
     }
 }
 
+Node *reverseList(Node *&head, Node *&tail) // iteratively reversing linked list
+{
+    if (head == NULL || head->next == NULL) // empty linked list or single node linked list
+    {
+        return head;
+    }
+
+    tail = head;
+    Node *prev = NULL;
+    Node *curr = head;
+
+    while (curr != NULL)
+    {
+        Node *forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+
+    return prev;
+}
+
+Node *reverseList1(Node *&head, Node *&tail) // recursively reversing linked list
+{
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+
+    Node *chhotaHead = reverseList1(head->next, tail);
+
+    head->next->next = head;
+    head->next = NULL;
+
+    tail = head;
+    return chhotaHead;
+}
+
 void printList(Node *head)
 {
     if (head == NULL)
@@ -145,6 +183,7 @@ int main()
     cout << "Printing head->data " << head->data << endl;
     cout << "Printing tail->data " << tail->data << endl;
 
+    /*
     deleteNode(head, tail, 1); // deleting first node
     printList(head);
 
@@ -153,6 +192,17 @@ int main()
 
     deleteNode(head, tail, 7); // deleting last node
     printList(head);
+    */
+
+    Node *newHead = reverseList(head, tail);
+    printList(newHead);
+    cout << "Printing head->data " << newHead->data << endl;
+    cout << "Printing tail->data " << tail->data << endl;
+
+    Node *newHead1 = reverseList1(newHead, tail);
+    printList(newHead1);
+    cout << "Printing head->data " << newHead1->data << endl;
+    cout << "Printing tail->data " << tail->data << endl;
 
     return 0;
 }
