@@ -147,6 +147,18 @@ Node *reverseList1(Node *&head, Node *&tail) // recursively reversing linked lis
     return chhotaHead;
 }
 
+void reverseList2(Node *&head, Node *&curr, Node *&prev)
+{
+    if (curr == NULL)
+    {
+        head = prev;
+        return;
+    }
+
+    reverseList2(head, curr->next, curr);
+    curr->next = prev;
+}
+
 void printList(Node *head)
 {
     if (head == NULL)
@@ -203,6 +215,11 @@ int main()
     printList(newHead1);
     cout << "Printing head->data " << newHead1->data << endl;
     cout << "Printing tail->data " << tail->data << endl;
+
+    // Node *curr = head;
+    // Node *prev = NULL;
+    // reverseList2(head, curr, prev);
+    // printList(head);
 
     return 0;
 }
