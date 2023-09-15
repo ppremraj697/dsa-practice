@@ -159,6 +159,58 @@ void reverseList2(Node *&head, Node *&curr, Node *&prev)
     curr->next = prev;
 }
 
+int middleOfList(Node *head)
+{
+    int size = 1;
+    Node *temp1 = head;
+
+    while (temp1 != NULL)
+    {
+        temp1 = temp1->next;
+        size++;
+    }
+
+    int middle = (size / 2) + 1;
+
+    int count = 0;
+    Node *temp2 = head;
+    while (middle <= count)
+    {
+        temp2 = temp2->next;
+    }
+
+    return temp2->data;
+}
+
+int middleOfList1(Node *head)
+{
+    // considering that list has atleast one node
+    if (head->next == NULL)
+    {
+        return head->data;
+    }
+    else if (head->next->next == NULL)
+    {
+        return head->next->data;
+    }
+
+    Node *slow = head;
+    Node *fast = head->next;
+
+    while (fast != NULL)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            fast = fast->next;
+        }
+
+        slow = slow->next;
+    }
+
+    return slow->data;
+}
+
 void printList(Node *head)
 {
     if (head == NULL)
@@ -191,11 +243,12 @@ int main()
     insertAtPosition(head, tail, 1, 80);
     insertAtPosition(head, tail, 8, 90);
     insertAtPosition(head, tail, 4, 100);
+    insertAtPosition(head, tail, 2, 110);
     printList(head);
     cout << "Printing head->data " << head->data << endl;
     cout << "Printing tail->data " << tail->data << endl;
 
-    /*
+    /*DELETION
     deleteNode(head, tail, 1); // deleting first node
     printList(head);
 
@@ -206,6 +259,7 @@ int main()
     printList(head);
     */
 
+    /*REVERSAL
     Node *newHead = reverseList(head, tail);
     printList(newHead);
     cout << "Printing head->data " << newHead->data << endl;
@@ -216,10 +270,16 @@ int main()
     cout << "Printing head->data " << newHead1->data << endl;
     cout << "Printing tail->data " << tail->data << endl;
 
-    // Node *curr = head;
-    // Node *prev = NULL;
-    // reverseList2(head, curr, prev);
-    // printList(head);
+    Node *curr = head;
+    Node *prev = NULL;
+    reverseList2(head, curr, prev);
+    printList(head);
+    */
+
+    int middle0 = middleOfList1(head);
+    cout << "Middle of linked list is " << middle0 << endl;
+    int middle1 = middleOfList1(head);
+    cout << "Middle of linked list is " << middle1 << endl;
 
     return 0;
 }
