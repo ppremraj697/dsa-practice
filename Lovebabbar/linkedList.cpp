@@ -211,6 +211,60 @@ int middleOfList1(Node *head)
     return slow->data;
 }
 
+bool detectLoop(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head->next;
+
+    while (fast != NULL && fast != slow)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            fast = fast->next;
+        }
+
+        slow = slow->next;
+    }
+
+    if (slow == fast)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+Node *startOfLoop(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head->next;
+
+    while (fast != NULL && fast != slow)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            fast = fast->next;
+        }
+
+        slow = slow->next;
+    }
+
+    slow = head;
+    fast = fast->next;
+
+    while (slow != fast)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    return slow;
+}
+
 void printList(Node *head)
 {
     if (head == NULL)
@@ -276,10 +330,30 @@ int main()
     printList(head);
     */
 
+    /*MIDDLE OF LIST
     int middle0 = middleOfList1(head);
     cout << "Middle of linked list is " << middle0 << endl;
     int middle1 = middleOfList1(head);
     cout << "Middle of linked list is " << middle1 << endl;
+    */
+
+    // tail->next = head->next->next->next->next->next;
+    tail->next = head->next->next->next->next;
+    // tail->next = head->next->next->next;
+    // tail->next = head;
+
+    bool ans = detectLoop(head);
+    if (ans)
+    {
+        cout << "List contains LOOP " << endl;
+    }
+    else
+    {
+        cout << "List doesn't have LOOP " << endl;
+    }
+
+    Node *ans1 = startOfLoop(head);
+    cout << "Starting point of loop is " << ans1->data << endl;
 
     return 0;
 }
