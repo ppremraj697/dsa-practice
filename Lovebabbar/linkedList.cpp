@@ -265,6 +265,18 @@ Node *startOfLoop(Node *head)
     return slow;
 }
 
+void removeLoop(Node *startNode)
+{
+    Node *temp = startNode;
+
+    while (temp->next != startNode)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = NULL;
+}
+
 void printList(Node *head)
 {
     if (head == NULL)
@@ -337,7 +349,8 @@ int main()
     cout << "Middle of linked list is " << middle1 << endl;
     */
 
-    // tail->next = head->next->next->next->next->next;
+    // DETECTION OF LOOP(YES/NO), STARTING NODE OF THE LOOP, REMOVAL OF LOOP
+    //  tail->next = head->next->next->next->next->next;
     tail->next = head->next->next->next->next;
     // tail->next = head->next->next->next;
     // tail->next = head;
@@ -354,6 +367,8 @@ int main()
 
     Node *ans1 = startOfLoop(head);
     cout << "Starting point of loop is " << ans1->data << endl;
+
+    removeLoop(ans1);
 
     return 0;
 }
