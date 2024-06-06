@@ -20,37 +20,30 @@ using namespace std;
 
 int algoImplementation(string str)
 {
-    if (str[0] == str[str.size() - 1])
-    {
-        char ch = str[0];
-        while (ch == str[0])
-        {
-            str.erase(str.begin());
-        }
-        while (ch == str[str.size() - 1])
-        {
-            str.erase(str.end() - 1);
-        }
-
-        if (str[0] == str[str.size() - 1])
-        {
-            int newLen = algoImplementation(str);
-            return newLen;
-        }
-        else
-        {
-            return str.size();
-        }
-    }
-    else
+    if (str[0] != str[str.size() - 1])
     {
         return str.size();
     }
+
+    char ch = str[0];
+    while (ch == str[0])
+    {
+        str.erase(str.begin());
+    }
+    while (ch == str[str.size() - 1])
+    {
+        str.erase(str.end() - 1);
+    }
+
+    int newLen = algoImplementation(str);
+    return newLen;
 }
 
 int main()
 {
     string str = "aabccabba";
+    // string str = "bccabb";
+    // string str = "ca";
     int ans = algoImplementation(str);
     cout << ans << endl;
     return 0;
