@@ -20,17 +20,17 @@ using namespace std;
 
 int algoImplementation(string str)
 {
-    if (str[0] != str[str.size() - 1])
+    if (str.size() <= 1 || str[0] != str[str.size() - 1])
     {
         return str.size();
     }
 
     char ch = str[0];
-    while (ch == str[0])
+    while (str.size() != 0 && ch == str[0])
     {
         str.erase(str.begin());
     }
-    while (ch == str[str.size() - 1])
+    while (str.size() != 0 && ch == str[str.size() - 1])
     {
         str.erase(str.end() - 1);
     }
@@ -41,9 +41,13 @@ int algoImplementation(string str)
 
 int main()
 {
-    string str = "aabccabba";
-    // string str = "bccabb";
-    // string str = "ca";
+    // string str = "aabccabba"; // 3
+    string str = "abccba"; // 0
+    // string str = "abcba";     // 1
+    // string str = "bccabb";    // 3
+    // string str = "ca";        // 2
+    // string str = "";        // 0
+
     int ans = algoImplementation(str);
     cout << ans << endl;
     return 0;
